@@ -1,0 +1,64 @@
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <form runat="addwarehouse.html">
+  <input accept="image/*" type='file' id="imgInp" />
+  <br>
+  <img id="blah" src="#"/>
+    </form>
+    <script>
+    imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+</script>
+    <form onsubmit="setSustainibilityScore()"> 
+      <div><p style="display: inline">Volume of product this month (cu. ft): </p><input id="product-volume" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">Warehouse area (sq. ft): </p><input id="area" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">KWH this month: </p><input id="kwh" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">CO2 emissions this month (Kg): </p><input id="ghg" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">Waste product this month (lb): </p><input id="waste" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">Water usage this month (Hundred Cubit Feet): </p><input id="water" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">Employee turnover rate (%): </p><input id="turnover" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <div><p style="display: inline">Amount of highways in a 5 mile radius: </p><input id="highway" class="factor" type="number" style="display: inline; margin-left: 10px" required></div>
+      <button>submit</button>
+    </form>
+    <h2>Sustainability Score:  
+    <label for=“displayValue"> The output is: </label><input type=""textbox" name="display">
+      <script>
+        function setSustainibilityScore() {
+          var volume = parseInt(document.getElementById("product-volume").value); 
+          var energy_efficiency = parseInt(document.getElementById("kwh").value / volume); // 6.1 x sq ft
+          var emissions = parseInt(document.getElementById("ghg").value / volume); // 35/6
+          console.log(emissions);
+          var waste = parseInt(document.getElementById("waste").value / volume); //35/12
+          console.log(waste);
+          var water = parseInt(document.getElementById("water").value); // 7/60
+          console.log(water);
+          var turnover = parseInt(document.getElementById("turnover").value / 100); // 7/20 
+          console.log(turnover);
+          var accessibility = parseInt(document.getElementById("highway").value / 5); // 21/50  when this gets higher its good
+          console.log(accessibility);
+          var test = parseInt(volume + energy_efficiency + emissions + waste + water + turnover + accessibility);
+          test = (100 / 6)*((35 / (6 * energy_efficiency))+((35 / (6 * emissions)))+(35 / (12 * waste))+(7 / (water*60))+(7 / (20 * turnover))+(21 * highway / 50));
+          console.log(test);
+          document.getElementsByName('display')[0].value = test
+        }
+        
+        </script> 
+    
+    </h2>
+
+</body>
+</html>
+```
